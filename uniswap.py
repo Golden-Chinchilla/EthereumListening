@@ -8,8 +8,12 @@
 # V2 EVENT https://etherscan.io/address/0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f#events
 
 from web3 import Web3
+from dotenv import load_dotenv
+import os
 
-w3 = Web3(Web3.HTTPProvider('https://mainnet.infura.io/v3/5c70aefd4b02485c97031081e7d11720'))
+load_dotenv()
+infura = os.getenv('infura')
+w3 = Web3(Web3.HTTPProvider(infura))
 
 # uniswap_router = '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D'
 uniswap_factory = '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f'

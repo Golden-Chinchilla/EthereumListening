@@ -1,7 +1,11 @@
 from web3 import Web3
 import requests
+from dotenv import load_dotenv
+import os
 
-w3 = Web3(Web3.HTTPProvider('https://mainnet.infura.io/v3/5c70aefd4b02485c97031081e7d11720'))
+load_dotenv()
+infura = os.getenv('infura')
+w3 = Web3(Web3.HTTPProvider(infura))
 
 class Tools():
     @classmethod
