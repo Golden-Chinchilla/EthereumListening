@@ -1,0 +1,8 @@
+
+
+AttributeDict({'args': AttributeDict({'token0': '0x036B8CEc943fF58619Ab477f3189424f56829B79', 'token1': '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2', 'pair': '0x32a403e17B05a9f8343727Ff9111478D7D716179', '': 345375}), 'event': 'PairCreated', 'logIndex': 307, 'transactionIndex': 156, 'transactionHash': HexBytes('0xfda0848a23f94c7f9638b25b87950181ab71918a59ec5d63ff72b40ff3e3ca56'), 'address': '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f', 'blockHash': HexBytes('0x349ebacacd58e3cba80f09341ab7e7b4992780a18fa428f5a18be4e719207251'), 'blockNumber': 20346908})
+
+pair: 0x32a403e17B05a9f8343727Ff9111478D7D716179
+
+这条记录不能直接在dexscreenr上进行查找
+https://etherscan.io/tx/0xfda0848a23f94c7f9638b25b87950181ab71918a59ec5d63ff72b40ff3e3ca56
