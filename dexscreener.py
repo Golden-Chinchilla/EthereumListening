@@ -12,7 +12,7 @@ import datetime
 # test_addr = '0x93f053DEa19e5606D158Fc0c6E6F4fB32f3beaF0'
 class Dex():
     @classmethod
-    def get_pair_dex_info(cls, pair_addr: str) -> str:
+    def get_pair_info(cls, pair_addr: str) -> str:
 
         # 查询不到交易对时的返回值：{"schemaVersion":"1.0.0","pairs":null,"pair":null}
         token_url = f'https://api.dexscreener.com/latest/dex/pairs/ethereum/{pair_addr}'
@@ -22,10 +22,12 @@ class Dex():
         raw = requests.get(token_url)
         r = raw.json()
 
+        # 第一次大概率是获取不到的
         if r['pairs'] is None:
             content = '未在dexscreener上找到相关信息。'
             return content
 
+        # telegram 内做二次查询
         else:
             # url
             dexscreener_url = r['pairs'][0]['url']
@@ -35,7 +37,7 @@ class Dex():
             token_symbol = r['pairs'][0]['baseToken']['symbol']
 
             # info/website, info/social
-            # 这两个信息实际不一定有，用try处理
+            # 这两个信息实际不一定有
             try:
                 website = r['pairs'][0]['info']['websites'][0]['url']
                 twitter = r['pairs'][0]['info']['socials'][0]['url']

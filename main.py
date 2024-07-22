@@ -17,7 +17,7 @@ async def send_msg(msg: str):
 
 def main():
   while True:
-    pair_addr = Uniswap.get_pair_addr()
+    pair_addr = Uniswap.get_pair_addr()[0]
 
     # 未在event filter中获取到最新事件
     if pair_addr is None:
@@ -25,7 +25,7 @@ def main():
 
     # 发生事件，开始从dexscreener上获取相关信息 
     else:
-      info = Dex.get_pair_dex_info(pair_addr)
+      info = Dex.get_pair_info(pair_addr)
       asyncio.run(send_msg(info))
 
     time.sleep(3)

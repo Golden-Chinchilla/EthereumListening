@@ -27,10 +27,12 @@ event_filter = FactoryContract.events.PairCreated.create_filter(fromBlock = 'lat
 # [AttributeDict({'args': AttributeDict({'token0': '0x95DE2Dc9d67a0a0e03F0311027e74d94433BAA90', 'token1': '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2', 'pair': '0x7dEe5717E92CA2DDF4CC176EAA823c365a04299F', '': 345790}), 'event': 'PairCreated', 'logIndex': 136, 'transactionIndex': 35, 'transactionHash': HexBytes('0x7662eb76d97b842bcdbb42dcb90f44dae6a015d63e0391bd97a3e6528fadd207'), 'address': '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f', 'blockHash': HexBytes('0x60e5a47c99bee14ecab8ccd035087a16e0c35bb165b6bbbf6e67f590a849da63'), 'blockNumber': 20355044})]
 class Uniswap():
     @classmethod
-    def get_pair_addr(cls):
+    def get_pair_addr(cls) -> tuple:
         logs = event_filter.get_new_entries()
         try:
             pair_addr = logs[0]['args']['pair']
-            return pair_addr
+            token0 = logs[0]['args']['token0']
+            token1 = logs[0]['args']['token1']
+            return pair_addr, token0, token1
         except:
             return
