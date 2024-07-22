@@ -12,8 +12,18 @@ class Tools():
     def _check_signature(cls, hex_signature: str) -> str:
         hex_signature_url = f'https://www.4byte.directory/api/v1/signatures/?format=json&hex_signature={hex_signature}'
         r = requests.get(hex_signature_url).json()
-        text_signature = r['results'][0]['text_signature']
-        return text_signature
+        try:
+            text_signature = r['results'][0]['text_signature']
+            return text_signature
+        except:
+            return 'Not Found'
+        
+    @classmethod
+    # logs = event_filter.get_new_entries()
+    def get_tx_hash_from_event_logs(cls, logs) -> str:
+        binary = logs[0]['transactionHash']
+        tx_hash = Web3.to_hex(binary)
+        return tx_hash
     
     @classmethod
     def get_tx_method(cls, tx_hash: str) -> str:

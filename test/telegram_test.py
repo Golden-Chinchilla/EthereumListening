@@ -9,15 +9,26 @@ token = os.getenv('token')
 chat_id = os.getenv('chat_id')
 
 # 先创建Button对象，再创建Markup对象
-keyboard = [
-  [telegram.InlineKeyboardButton(text = '测试按钮', callback_data = 'test')]
-  ]
+# keyboard = [
+#   [telegram.InlineKeyboardButton(text = '测试按钮', callback_data = 'test')]
+#   ]
 
-markup = telegram.InlineKeyboardMarkup(keyboard)
+# markup = telegram.InlineKeyboardMarkup(keyboard)
+
+# async def send_msg(msg: str):
+#   bot = telegram.Bot(token=token)
+#   async with bot:
+#     await bot.send_message(chat_id = chat_id, text = msg, reply_markup = markup)
 
 async def send_msg(msg: str):
   bot = telegram.Bot(token=token)
   async with bot:
-    await bot.send_message(chat_id = chat_id, text = msg, reply_markup = markup)
+    await bot.send_message(chat_id = chat_id, text = msg, parse_mode=telegram.constants.ParseMode.HTML)
 
-asyncio.run(send_msg('test msg'))
+
+base_url = 'https://etherscan.io/address/'
+address = '0xdb767e9626a543BB9b61964421BFA4512185469b'
+
+asyncio.run(send_msg(f'''
+*代币创建信息*\n
+Pair: <a href="{base_url}+{address}">{address}</a>'''))

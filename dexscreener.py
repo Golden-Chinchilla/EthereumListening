@@ -1,5 +1,6 @@
 import requests
 import datetime
+from uniswap import Uniswap
 # https://requests.readthedocs.io/en/latest/
 
 # dexscreen api
@@ -22,7 +23,7 @@ class Dex():
         raw = requests.get(token_url)
         r = raw.json()
 
-        # 第一次大概率是获取不到的
+        # 如果在dexscreener上获取不到相应信息，则抓取Factory的链上事件信息
         if r['pairs'] is None:
             content = '未在dexscreener上找到相关信息。'
             return content
