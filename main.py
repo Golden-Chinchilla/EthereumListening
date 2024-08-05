@@ -43,9 +43,16 @@ def main():
 Method ID: {method_id}\n
 Pair: <a href="{base_url}{pair_addr}">{pair_addr}</a>\n
 Token0: <a href="{base_url}{token0}">{token0}</a>\n
-Token1: <a href="{base_url}{token1}">{token1}</a>\n\n
-<b>Dexscreener信息</b>\n
-{info}'''))
+Token1: <a href="{base_url}{token1}">{token1}</a>'''))
+      
+#       asyncio.run(send_msg(f'''
+# <b>代币创建信息</b>\n
+# Method ID: {method_id}\n
+# Pair: <a href="{base_url}{pair_addr}">{pair_addr}</a>\n
+# Token0: <a href="{base_url}{token0}">{token0}</a>\n
+# Token1: <a href="{base_url}{token1}">{token1}</a>\n\n
+# <b>Dexscreener信息</b>\n
+# {info}'''))
 
     time.sleep(2)
 
