@@ -5,7 +5,10 @@ import asyncio
 from dotenv import load_dotenv
 import os
 
-# 代币创建事件和dexscreener api之间存在延迟, 需要在tg的每个msg上做个button, 事后可以一键点击查询dexscreener api中的相关信息
+# wiki
+# https://github.com/python-telegram-bot/python-telegram-bot/wiki/InlineKeyboard-Example
+# https://docs.python-telegram-bot.org/en/latest/examples.inlinekeyboard.html
+
 load_dotenv()
 token = os.getenv('token')
 chat_id = os.getenv('chat_id')
@@ -22,7 +25,7 @@ markup = InlineKeyboardMarkup(keyboard)
 
 
 async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-  pass
+  print('this is callback')
 
 async def send_msg(msg: str):
   bot = Bot(token=token)
@@ -38,6 +41,13 @@ async def send_msg(msg: str):
 base_url = 'https://etherscan.io/address/'
 address = '0xdb767e9626a543BB9b61964421BFA4512185469b'
 
-asyncio.run(send_msg(f'''
-代币创建信息\n
-Pair: <a href="{base_url}+{address}">{address}</a>\n#Address'''))
+# asyncio.run(send_msg(f'''
+# 代币创建信息\n
+# Pair: <a href="{base_url}+{address}">{address}</a>\n#Address'''))
+application = Application.builder().token("TOKEN").build()
+
+# application.add_handler(CommandHandler("start", start))
+application.add_handler(CallbackQueryHandler(button))
+
+# Run the bot until the user presses Ctrl-C
+application.run_polling(allowed_updates=Update.ALL_TYPES)
