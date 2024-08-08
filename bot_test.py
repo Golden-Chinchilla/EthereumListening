@@ -4,6 +4,7 @@ from telegram.ext import Application, CallbackQueryHandler , ContextTypes, Comma
 import asyncio
 from dotenv import load_dotenv
 import os
+from dexscreener import Dex
 
 # wiki
 # https://github.com/python-telegram-bot/python-telegram-bot/wiki/InlineKeyboard-Example
@@ -13,12 +14,13 @@ load_dotenv()
 token = os.getenv('token')
 chat_id = os.getenv('chat_id')
 
+# maga pair addr: 0xE4b8583cCB95b25737C016ac88E539D0605949e8
 
 async def go(update: Update, context: ContextTypes.DEFAULT_TYPE):
   
 # 先创建 Button 对象，再创建 Markup 对象
   keyboard = [
-    [InlineKeyboardButton(text = '测试按钮', callback_data="this is callback_data")]
+    [InlineKeyboardButton(text = '测试按钮', callback_data="0xE4b8583cCB95b25737C016ac88E539D0605949e8")]
     ]
   markup = InlineKeyboardMarkup(keyboard)
   
@@ -26,12 +28,13 @@ async def go(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 # async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 #   print('this is callback')
-  
+
 async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    """Parses the CallbackQuery and updates the message text."""
+    #  CallbackQuery object represents an incoming callback query from a callback button in an inline keyboard.
     query = update.callback_query
-    await query.answer()
-    await query.edit_message_text(text=f"Selected option: {query.data} + 1")
+    info = Dex.get_pair_info(query.data)
+    # await query.edit_message_text(text=f"Selected option: {query.data} + 1")
+    await query.get_bot().send_message(text = info, chat_id = chat_id)
 
 base_url = 'https://etherscan.io/address/'
 address = '0xdb767e9626a543BB9b61964421BFA4512185469b'

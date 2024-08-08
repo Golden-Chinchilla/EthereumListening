@@ -55,14 +55,14 @@ class Dex():
             timestamp = r['pairs'][0]['pairCreatedAt']
             time = datetime.datetime.fromtimestamp(timestamp/1000, datetime.timezone.utc)
             content = f'''
-        Dexscreener: {dexscreener_url}\n
-        Name: {token_name}\n
-        Symbol: {token_symbol}\n
-        Website: {website}\n
-        Twitter: {twitter}\n
-        Liquidity_usd: {liquidity_usd}\n
-        Liquidity_base: {liquidity_base}\n
-        Liquidity_quote: {liquidity_quote}\n
-        Created At: {time}
+Dexscreener: {dexscreener_url}\n
+Name: {token_name}\n
+Symbol: {token_symbol}\n
+Website: {website}\n
+Twitter: {twitter}\n
+Liquidity_usd: {liquidity_usd}\n
+Liquidity_base: {liquidity_base}\n
+Liquidity_quote: {liquidity_quote}\n
+Created At: {time}
         '''
             return content
